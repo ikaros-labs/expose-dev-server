@@ -24,12 +24,23 @@ If the process isn't up after 3 seconds, wait a bit longer or check for errors b
 
 ### Step 2 — Choose a name
 
-Pick a short, descriptive, kebab-case name:
-- Reflects the project or what's being tested (e.g. `my-app`, `api-server`, `frontend-demo`)
-- Lowercase letters, numbers, and hyphens only
-- 2–4 words max, memorable
+The name becomes the subdomain, so make it meaningful at a glance — think **branch name or short feature description**, not project name.
 
-Default: convert the current directory name to kebab-case.
+- 2–5 words, kebab-case, lowercase letters/numbers/hyphens only
+- Describes *what's being tested*, not just *what the app is*
+- First check: use the current git branch name if it's short and descriptive
+
+```bash
+git branch --show-current  # e.g. "add-user-auth" → perfect as-is
+```
+
+| ✅ Good                  | ❌ Avoid           |
+|--------------------------|--------------------|
+| `add-user-auth`          | `my-app`           |
+| `payment-flow`           | `frontend`         |
+| `redesign-header`        | `dev`              |
+| `fix-search-bug`         | `test`             |
+| `onboarding-v2`          | `app-3000`         |
 
 ### Step 3 — Register the subdomain
 
@@ -81,8 +92,11 @@ User: "Start the Next.js dev server and give me a link to test."
 npm run dev &
 sleep 3
 
-# 2. Register (current dir is "my-app", port 3000)
-dev-register my-app 3000 4h
+# 2. Check branch name for the subdomain
+git branch --show-current  # → "redesign-checkout"
+
+# 3. Register
+dev-register redesign-checkout 3000 4h
 ```
 
-Reply: "Your app is live at: https://my-app.demo.nikmel.dev (expires in 4h)"
+Reply: "Your app is live at: https://redesign-checkout.demo.nikmel.dev (expires in 4h)"

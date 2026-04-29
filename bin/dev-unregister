@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+name=${1:?usage: dev-unregister <name>}
+
+# TODO: implement tunnel/proxy teardown
+# Should remove the <name>.demo.nikmel.dev registration

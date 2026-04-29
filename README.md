@@ -39,9 +39,13 @@ The `<name>` becomes the subdomain: `https://<name>.demo.nikmel.dev`
 # Clone the repo
 git clone git@github.com:ikaros-labs/expose-dev-server.git ~/projects/expose-dev-server
 
-# Symlink into Claude's plugin directory
+# Install the CLI scripts
+ln -s ~/projects/expose-dev-server/bin/dev-register /usr/local/bin/dev-register
+ln -s ~/projects/expose-dev-server/bin/dev-unregister /usr/local/bin/dev-unregister
+
+# Install the Claude Code plugin
 ln -s ~/projects/expose-dev-server \
   ~/.claude/plugins/marketplaces/claude-plugins-official/plugins/expose-dev-server
 ```
 
-Then restart Claude Code.
+Then fill in the implementation in `bin/dev-register` and `bin/dev-unregister`, and restart Claude Code.
