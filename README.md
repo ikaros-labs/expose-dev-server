@@ -37,7 +37,7 @@ The `<name>` becomes the subdomain: `https://<name>.demo.nikmel.dev`
 
 ```bash
 # Clone the repo
-git clone https://github.com/nikmel/expose-dev-server ~/projects/expose-dev-server
+git clone git@github.com:ikaros-labs/expose-dev-server.git ~/projects/expose-dev-server
 
 # Symlink into Claude's plugin directory
 ln -s ~/projects/expose-dev-server \
