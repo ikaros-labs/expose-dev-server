@@ -24,23 +24,26 @@ If the process isn't up after 3 seconds, wait a bit longer or check for errors b
 
 ### Step 2 — Choose a name
 
-The name becomes the subdomain, so make it meaningful at a glance — think **branch name or short feature description**, not project name.
+The name becomes the subdomain, so make it meaningful at a glance. Use **`<project>-<branch-or-feature>`** — a short project identifier plus what's being tested.
 
-- 2–5 words, kebab-case, lowercase letters/numbers/hyphens only
-- Describes *what's being tested*, not just *what the app is*
-- First check: use the current git branch name if it's short and descriptive
+- Format: `<project>-<feature>`, kebab-case, lowercase letters/numbers/hyphens only
+- Keep it under ~30 characters total so URLs stay readable
+- Derive the project slug from the repo/directory name (shorten if needed)
+- Derive the feature from the current git branch if it's descriptive
 
 ```bash
-git branch --show-current  # e.g. "add-user-auth" → perfect as-is
+git branch --show-current       # e.g. "add-user-auth"
+basename "$(git rev-parse --show-toplevel)"  # e.g. "shop" or "dashboard"
+# → combine: "shop-add-user-auth"
 ```
 
-| ✅ Good                  | ❌ Avoid           |
-|--------------------------|--------------------|
-| `add-user-auth`          | `my-app`           |
-| `payment-flow`           | `frontend`         |
-| `redesign-header`        | `dev`              |
-| `fix-search-bug`         | `test`             |
-| `onboarding-v2`          | `app-3000`         |
+| ✅ Good                       | ❌ Avoid           |
+|------------------------------|--------------------|
+| `shop-redesign-checkout`     | `my-app`           |
+| `api-fix-search-bug`         | `frontend`         |
+| `dashboard-add-auth`         | `dev`              |
+| `site-onboarding-v2`         | `test`             |
+| `admin-payment-flow`         | `app-3000`         |
 
 ### Step 3 — Register the subdomain
 
@@ -92,11 +95,13 @@ User: "Start the Next.js dev server and give me a link to test."
 npm run dev &
 sleep 3
 
-# 2. Check branch name for the subdomain
-git branch --show-current  # → "redesign-checkout"
+# 2. Derive name from project + branch
+git branch --show-current                        # → "redesign-checkout"
+basename "$(git rev-parse --show-toplevel)"      # → "shop"
+# → combine: "shop-redesign-checkout"
 
 # 3. Register
-dev-register redesign-checkout 3000 4h
+dev-register shop-redesign-checkout 3000 4h
 ```
 
-Reply: "Your app is live at: https://redesign-checkout.demo.nikmel.dev (expires in 4h)"
+Reply: "Your app is live at: https://shop-redesign-checkout.demo.nikmel.dev (expires in 4h)"
