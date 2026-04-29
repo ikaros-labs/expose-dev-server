@@ -43,4 +43,6 @@ make install
 
 Then fill in the implementation in `bin/dev-register` and `bin/dev-unregister`, and restart Claude Code.
 
+`make install` registers the plugin in a personal local marketplace (`~/.claude/plugins/marketplaces/local/`) — separate from the official Anthropic marketplace. The `bin/` scripts are automatically added to the Bash tool's PATH by the plugin system; no manual symlinking to `/usr/local/bin/` needed.
+
 To uninstall: `make uninstall`
