@@ -24,18 +24,12 @@ If the process isn't up after 3 seconds, wait a bit longer or check for errors b
 
 ### Step 2 — Choose a name
 
-The name becomes the subdomain, so make it meaningful at a glance. Use **`<project>-<branch-or-feature>`** — a short project identifier plus what's being tested.
+The name becomes the subdomain, so make it meaningful at a glance. Use **`<project>-<feature>`** — a short project identifier plus what's being tested.
 
 - Format: `<project>-<feature>`, kebab-case, lowercase letters/numbers/hyphens only
 - Keep it under ~30 characters total so URLs stay readable
-- Derive the project slug from the repo/directory name (shorten if needed)
-- Derive the feature from the current git branch if it's descriptive
-
-```bash
-git branch --show-current       # e.g. "add-user-auth"
-basename "$(git rev-parse --show-toplevel)"  # e.g. "shop" or "dashboard"
-# → combine: "shop-add-user-auth"
-```
+- Derive the project slug from the directory/repo name visible in context (shorten if needed)
+- Derive the feature slug from the task description or what's being tested — make it up from context, do not run git commands
 
 | ✅ Good                       | ❌ Avoid           |
 |------------------------------|--------------------|
@@ -95,10 +89,9 @@ User: "Start the Next.js dev server and give me a link to test."
 npm run dev &
 sleep 3
 
-# 2. Derive name from project + branch
-git branch --show-current                        # → "redesign-checkout"
-basename "$(git rev-parse --show-toplevel)"      # → "shop"
-# → combine: "shop-redesign-checkout"
+# 2. Pick a name from context
+# project = "shop" (from directory name), feature = "redesign-checkout" (from task)
+# → name: "shop-redesign-checkout"
 
 # 3. Register
 dev-register shop-redesign-checkout 3000 4h
