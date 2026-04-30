@@ -5,9 +5,9 @@ BIN_DIR   ?= $(HOME)/.local/bin
 
 install:
 	mkdir -p $(SKILL_DIR) $(BIN_DIR)
-	ln -sf $(shell pwd)/skills/exposing-dev-server $(SKILL_DIR)/exposing-dev-server
-	ln -sf $(shell pwd)/bin/dev-register   $(BIN_DIR)/dev-register
-	ln -sf $(shell pwd)/bin/dev-unregister $(BIN_DIR)/dev-unregister
+	ln -sfn $(shell pwd)/skills/exposing-dev-server $(SKILL_DIR)/exposing-dev-server
+	ln -sfn $(shell pwd)/bin/dev-register   $(BIN_DIR)/dev-register
+	ln -sfn $(shell pwd)/bin/dev-unregister $(BIN_DIR)/dev-unregister
 	@echo "Done. Restart Claude Code to activate the skill."
 	@echo "Make sure $(BIN_DIR) is in your PATH."
 
