@@ -41,8 +41,14 @@ cd ~/projects/expose-dev-server
 make install
 ```
 
-Then fill in the implementation in `bin/dev-register` and `bin/dev-unregister`, and restart Claude Code.
+`make install` registers this repo as a marketplace (`nikmel`) and installs the plugin via the `claude plugin` CLI. The `bin/` scripts are automatically added to the Bash tool's PATH by the plugin system — no manual symlinking needed.
 
-`make install` registers the plugin in a personal local marketplace (`~/.claude/plugins/marketplaces/local/`) — separate from the official Anthropic marketplace. The `bin/` scripts are automatically added to the Bash tool's PATH by the plugin system; no manual symlinking to `/usr/local/bin/` needed.
+Run `/reload-plugins` inside Claude Code after installing to activate without a full restart.
+
+**Iterating locally** (changes reflected immediately, no reinstall needed):
+
+```bash
+make dev   # launches Claude Code with --plugin-dir pointed at this checkout
+```
 
 To uninstall: `make uninstall`
