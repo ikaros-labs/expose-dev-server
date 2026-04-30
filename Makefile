@@ -1,18 +1,17 @@
-.PHONY: install uninstall dev
+SKILL_DIR := $(HOME)/.claude/skills
+BIN_DIR   ?= $(HOME)/.local/bin
 
-# Register the marketplace and install the plugin via Claude Code CLI
+.PHONY: install uninstall
+
 install:
-	claude plugin marketplace add ikaros-labs/expose-dev-server
-	claude plugin install expose-dev-server@nikmel
-	@echo ""
-	@echo "Done. Run /reload-plugins inside Claude Code to activate."
+	mkdir -p $(SKILL_DIR) $(BIN_DIR)
+	ln -sf $(shell pwd)/skills/exposing-dev-server $(SKILL_DIR)/exposing-dev-server
+	ln -sf $(shell pwd)/bin/dev-register   $(BIN_DIR)/dev-register
+	ln -sf $(shell pwd)/bin/dev-unregister $(BIN_DIR)/dev-unregister
+	@echo "Done. Restart Claude Code to activate the skill."
+	@echo "Make sure $(BIN_DIR) is in your PATH."
 
-# Remove the plugin and marketplace
 uninstall:
-	claude plugin uninstall expose-dev-server@nikmel
-	claude plugin marketplace remove nikmel
+	rm -f $(SKILL_DIR)/exposing-dev-server
+	rm -f $(BIN_DIR)/dev-register $(BIN_DIR)/dev-unregister
 	@echo "Uninstalled."
-
-# Load directly from local checkout — useful while iterating on the skill
-dev:
-	claude --plugin-dir $(shell pwd)

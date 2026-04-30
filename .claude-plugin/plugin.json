@@ -1,8 +1,0 @@
-{
-  "name": "expose-dev-server",
-  "description": "Exposes local dev/demo servers via public subdomains for testing and sharing",
-  "version": "1.0.0",
-  "author": {
-    "name": "nikmel"
-  }
-}

@@ -41,14 +41,8 @@ cd ~/projects/expose-dev-server
 make install
 ```
 
-`make install` registers this repo as a marketplace (`nikmel`) and installs the plugin via the `claude plugin` CLI. The `bin/` scripts are automatically added to the Bash tool's PATH by the plugin system — no manual symlinking needed.
+Symlinks the skill into `~/.claude/skills/` and the scripts into `/usr/local/bin/`. Changes to the checkout are reflected immediately — no reinstall needed.
 
-Run `/reload-plugins` inside Claude Code after installing to activate without a full restart.
-
-**Iterating locally** (changes reflected immediately, no reinstall needed):
-
-```bash
-make dev   # launches Claude Code with --plugin-dir pointed at this checkout
-```
+Then fill in the implementation in `bin/dev-register` and `bin/dev-unregister`, and restart Claude Code.
 
 To uninstall: `make uninstall`
