@@ -5,5 +5,22 @@ name=${1:?usage: dev-register <name> <port> [ttl]}
 port=${2:?usage: dev-register <name> <port> [ttl]}
 ttl=${3:-4h}
 
-# TODO: implement tunnel/proxy registration
-# Should expose localhost:<port> at <name>.demo.nikmel.dev with the given TTL
+sites=/opt/caddy/demo-sites.d
+conf="$sites/$name.caddy"
+
+mkdir -p "$sites"
+tee "$conf" >/dev/null <<EOF
+@$name host $name.demo.nikmel.dev
+handle @$name {
+    reverse_proxy 127.0.0.1:$port
+}
+EOF
+
+caddy-reload 2>/dev/null
+
+# at(1) requires spelled-out units: "4 hours" not "4h"
+at_ttl="${ttl//h/ hours}"
+at_ttl="${at_ttl//m/ minutes}"
+echo "/usr/local/bin/dev-unregister '$name'" | at "now + $at_ttl" 2>/dev/null
+
+echo "REGISTERED: https://$name.demo.nikmel.dev (port $port, expires in $ttl)"
