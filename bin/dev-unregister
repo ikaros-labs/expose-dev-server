@@ -2,6 +2,14 @@
 set -euo pipefail
 
 name=${1:?usage: dev-unregister <name>}
+conf="/opt/caddy/demo-sites.d/$name.caddy"
 
-# TODO: implement tunnel/proxy teardown
-# Should remove the <name>.demo.nikmel.dev registration
+if [[ ! -f "$conf" ]]; then
+  echo "not registered: $name" >&2; exit 0
+fi
+
+rm -f "$conf"
+
+caddy-reload 2>/dev/null
+
+echo "UNREGISTERED: $name.demo.nikmel.dev"
