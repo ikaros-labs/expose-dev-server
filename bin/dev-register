@@ -21,6 +21,6 @@ caddy-reload 2>/dev/null
 # at(1) requires spelled-out units: "4 hours" not "4h"
 at_ttl="${ttl//h/ hours}"
 at_ttl="${at_ttl//m/ minutes}"
-echo "/usr/local/bin/dev-unregister '$name'" | at "now + $at_ttl" 2>/dev/null
+echo "$(command -v dev-unregister) '$name'" | at "now + $at_ttl" 2>/dev/null
 
 echo "REGISTERED: https://$name.demo.nikmel.dev (port $port, expires in $ttl)"
