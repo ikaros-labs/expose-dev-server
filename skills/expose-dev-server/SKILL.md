@@ -1,5 +1,5 @@
 ---
-name: exposing-dev-server
+name: expose-dev-server
 description: Exposes a local dev or demo server publicly for testing and sharing via a dedicated subdomain at <name>.demo.nikmel.dev. Use whenever the user asks to "run the server", "start the server", "start a dev server", "expose the app", "give me a link to test", "share the server", "I want to test this in the browser", wants a public URL for a local service, or explicitly says to expose a port. Registers the server using dev-register and unregisters with dev-unregister when done.
 allowed-tools: [Bash]
 ---

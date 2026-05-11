@@ -13,7 +13,7 @@ When you ask an agent to run or share a server, it will:
 
 ## Skills
 
-### `exposing-dev-server` (model-invoked)
+### `expose-dev-server` (model-invoked)
 
 Triggers automatically when you say things like:
 - "run the server and give me a link"
