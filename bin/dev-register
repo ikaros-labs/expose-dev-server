@@ -5,12 +5,15 @@ name=${1:?usage: dev-register <name> <port> [ttl]}
 port=${2:?usage: dev-register <name> <port> [ttl]}
 ttl=${3:-4h}
 
+domain_file="${XDG_CONFIG_HOME:-$HOME/.config}/expose-dev-server/domain"
+domain=$(cat "$domain_file" 2>/dev/null) || { echo "error: domain not configured. Run: make install DOMAIN=<your-domain>" >&2; exit 1; }
+
 sites=/opt/caddy/demo-sites.d
 conf="$sites/$name.caddy"
 
 mkdir -p "$sites"
 tee "$conf" >/dev/null <<EOF
-@$name host $name.demo.nikmel.dev
+@$name host $name.$domain
 handle @$name {
     reverse_proxy 127.0.0.1:$port
 }
@@ -23,4 +26,4 @@ at_ttl="${ttl//h/ hours}"
 at_ttl="${at_ttl//m/ minutes}"
 echo "$(command -v dev-unregister) '$name'" | at "now + $at_ttl" 2>/dev/null
 
-echo "REGISTERED: https://$name.demo.nikmel.dev (port $port, expires in $ttl)"
+echo "REGISTERED: https://$name.$domain (port $port, expires in $ttl)"

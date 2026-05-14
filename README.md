@@ -8,7 +8,7 @@ When you ask an agent to run or share a server, it will:
 
 1. Start the server process in the background (if not already running)
 2. Register it with `dev-register` to get a public subdomain
-3. Reply with the live URL: `https://<name>.demo.nikmel.dev`
+3. Reply with the live URL: `https://<name>.<your-domain>`
 4. Clean up with `dev-unregister` when you're done
 
 ## Skills
@@ -31,18 +31,20 @@ dev-register <name> <port> [ttl]
 dev-unregister <name>
 ```
 
-The `<name>` becomes the subdomain: `https://<name>.demo.nikmel.dev`
+The `<name>` becomes the subdomain: `https://<name>.<your-domain>`
 
 ## Installation
 
 ```bash
 git clone git@github.com:ikaros-labs/expose-dev-server.git ~/projects/expose-dev-server
 cd ~/projects/expose-dev-server
-make install
+make install DOMAIN=demo.codex.so
 ```
 
-Symlinks the skill into `~/.claude/skills/` and the scripts into `/usr/local/bin/`. Changes to the checkout are reflected immediately — no reinstall needed.
+- Scripts are symlinked into `~/.local/bin/` — changes to the checkout are reflected immediately.
+- SKILL.md is copied into `~/.claude/skills/` with the domain substituted — re-run `make install DOMAIN=...` after editing.
+- Domain is stored in `~/.config/expose-dev-server/domain` for runtime use.
 
-Then fill in the implementation in `bin/dev-register` and `bin/dev-unregister`, and restart Claude Code.
+Restart Claude Code to activate the skill.
 
 To uninstall: `make uninstall`
