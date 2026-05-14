@@ -1,7 +1,7 @@
 SKILL_DIR := $(HOME)/.claude/skills
 BIN_DIR   ?= $(HOME)/.local/bin
 CONF_DIR  := $(HOME)/.config/expose-dev-server
-DOMAIN    ?= demo.nikmel.dev
+DOMAIN    ?= example.com
 
 .PHONY: install uninstall
 
