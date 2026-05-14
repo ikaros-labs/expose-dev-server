@@ -2,6 +2,10 @@
 set -euo pipefail
 
 name=${1:?usage: dev-unregister <name>}
+
+domain_file="${XDG_CONFIG_HOME:-$HOME/.config}/expose-dev-server/domain"
+domain=$(cat "$domain_file" 2>/dev/null) || domain="<unknown>"
+
 conf="/opt/caddy/demo-sites.d/$name.caddy"
 
 if [[ ! -f "$conf" ]]; then
@@ -12,4 +16,4 @@ rm -f "$conf"
 
 caddy-reload 2>/dev/null
 
-echo "UNREGISTERED: $name.demo.nikmel.dev"
+echo "UNREGISTERED: $name.$domain"
