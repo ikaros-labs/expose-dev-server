@@ -9,7 +9,7 @@ install:
 	mkdir -p $(SKILL_DIR)/expose-dev-server $(BIN_DIR) $(CONF_DIR)
 	ln -sfn $(shell pwd)/bin/dev-register   $(BIN_DIR)/dev-register
 	ln -sfn $(shell pwd)/bin/dev-unregister $(BIN_DIR)/dev-unregister
-	sed 's/demo\.nikmel\.dev/$(DOMAIN)/g' skills/expose-dev-server/SKILL.md \
+	sed 's/_DOMAIN_/$(DOMAIN)/g' skills/expose-dev-server/SKILL.md \
 		> $(SKILL_DIR)/expose-dev-server/SKILL.md
 	echo '$(DOMAIN)' > $(CONF_DIR)/domain
 	@echo ""

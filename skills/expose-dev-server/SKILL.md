@@ -1,6 +1,6 @@
 ---
 name: expose-dev-server
-description: Exposes a local dev or demo server publicly for testing and sharing via a dedicated subdomain at <name>.demo.nikmel.dev. Use whenever the user asks to "run the server", "start the server", "start a dev server", "expose the app", "give me a link to test", "share the server", "I want to test this in the browser", wants a public URL for a local service, or explicitly says to expose a port. Registers the server using dev-register and unregisters with dev-unregister when done.
+description: Exposes a local dev or demo server publicly for testing and sharing via a dedicated subdomain at <name>._DOMAIN_. Use whenever the user asks to "run the server", "start the server", "start a dev server", "expose the app", "give me a link to test", "share the server", "I want to test this in the browser", wants a public URL for a local service, or explicitly says to expose a port. Registers the server using dev-register and unregisters with dev-unregister when done.
 allowed-tools: [Bash]
 ---
 
@@ -52,7 +52,7 @@ dev-register <name> <port> [ttl]
 Reply with:
 
 ```
-Your server is live at: https://<name>.demo.nikmel.dev
+Your server is live at: https://<name>._DOMAIN_
 ```
 
 Include the TTL so the user knows when the tunnel expires.
@@ -97,4 +97,4 @@ sleep 3
 dev-register shop-redesign-checkout 3000 4h
 ```
 
-Reply: "Your app is live at: https://shop-redesign-checkout.demo.nikmel.dev (expires in 4h)"
+Reply: "Your app is live at: https://shop-redesign-checkout._DOMAIN_ (expires in 4h)"
